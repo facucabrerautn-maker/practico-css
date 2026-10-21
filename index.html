@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frontend de librería: catálogo, alta de libros y clientes, ventas e historial.">
+  <title>Librería Página Abierta · Catálogo y gestión</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="salto-contenido" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="encabezado">
+    <div class="encabezado-inner">
+      <p class="marca">Librería <span>Página Abierta</span></p>
+      <p class="subtitulo">Catálogo, libros, clientes y ventas</p>
+    </div>
+    <nav aria-label="Navegación principal">
+      <ul class="navegacion">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#libros">Libros</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#ventas">Ventas</a></li>
+        <li><a href="#historial">Historial</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <!-- ============ CATÁLOGO ============ -->
+    <section id="catalogo" aria-labelledby="titulo-catalogo">
+      <h2 id="titulo-catalogo">Catálogo</h2>
+      <p>Buscá por título nuestros libros disponibles.</p>
+
+      <form id="form-busqueda" class="buscador" action="#" method="get">
+        <div class="campo">
+          <label for="buscador-titulo">Buscar por título</label>
+          <input type="search" id="buscador-titulo" name="busqueda" placeholder="Ej.: rayuela" autocomplete="off">
+        </div>
+        <div class="acciones">
+          <button type="submit" id="btn-buscar" class="btn btn-primario">Buscar en catálogo</button>
+          <button type="button" id="btn-limpiar-busqueda" class="btn btn-secundario">Mostrar todo el catálogo</button>
+        </div>
+      </form>
+
+      
+      <p id="catalogo-sin-resultados" class="mensaje mensaje-aviso" role="status" hidden>No se encontraron libros para esa búsqueda. Probá con otro título o mostrá todo el catálogo.</p>
+
+      <div id="catalogo-lista" class="tarjetas" aria-live="polite" aria-label="Listado de libros del catálogo">
+        <!-- Ejemplos estáticos para Ejercicio 1. En Ejercicio 3 JS los genera desde el array de libros. -->
+        <article class="tarjeta">
+          <h3>Rayuela</h3>
+          <dl class="datos-libro">
+            <div><dt>ISBN:</dt><dd>978-950-039-123-4</dd></div>
+            <div><dt>Editorial:</dt><dd>Sudamericana</dd></div>
+            <div><dt>Género:</dt><dd>Novela</dd></div>
+            <div><dt>Autores:</dt><dd>Julio Cortázar</dd></div>
+            <div><dt>Precio:</dt><dd>$1500.00</dd></div>
+          </dl>
+        </article>
+        <article class="tarjeta">
+          <h3>Manual de librería</h3>
+          <dl class="datos-libro">
+            <div><dt>ISBN:</dt><dd>978-950-000-001-2</dd></div>
+            <div><dt>Editorial:</dt><dd>Eudeba</dd></div>
+            <div><dt>Género:</dt><dd>Sin clasificar</dd></div>
+            <div><dt>Autores:</dt><dd>Ana Pérez, Luis Gómez</dd></div>
+            <div><dt>Precio:</dt><dd>$2000.00</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ LIBROS ============ -->
+    <section id="libros" aria-labelledby="titulo-libros">
+      <h2 id="titulo-libros">Libros</h2>
+      <p>Alta de libros y listado de libros registrados.</p>
+
+      <h3>Registrar un libro</h3>
+      <form id="form-libro" class="formulario" action="#" method="post" novalidate>
+        <div class="form-grid">
+          <div class="campo">
+            <label for="libro-titulo">Título *</label>
+            <input type="text" id="libro-titulo" name="titulo" required maxlength="120" placeholder="Ej.: Ficciones">
+          </div>
+          <div class="campo">
+            <label for="libro-isbn">ISBN *</label>
+            <input type="text" id="libro-isbn" name="isbn" required placeholder="Ej.: 978-950-039-456-3">
+          </div>
+          <div class="campo">
+            <label for="libro-precio">Precio *</label>
+            <input type="number" id="libro-precio" name="precio" required min="0.01" step="0.01" placeholder="Ej.: 1500.00">
+          </div>
+          <div class="campo">
+            <label for="libro-editorial">Editorial *</label>
+            <select id="libro-editorial" name="editorial" required>
+              <option value="">Seleccioná una editorial…</option>
+              <option value="ed1">Sudamericana</option>
+              <option value="ed2">Eudeba</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="libro-genero">Género</label>
+            <select id="libro-genero" name="genero">
+              <option value="">Sin clasificar</option>
+              <option value="gen1">Novela</option>
+              <option value="gen2">Ensayo</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="libro-autores">Autores * (podés elegir varios con Ctrl + clic)</label>
+            <select id="libro-autores" name="autores" multiple size="4" required>
+              <option value="au1">Julio Cortázar</option>
+              <option value="au2">Ana Pérez</option>
+              <option value="au3">Luis Gómez</option>
+            </select>
+          </div>
+        </div>
+        <div id="form-libro-errores" class="mensaje mensaje-error" role="alert" hidden></div>
+        <p id="form-libro-exito" class="mensaje mensaje-exito" role="status" hidden>Libro registrado correctamente.</p>
+        <div class="acciones">
+          <button type="submit" class="btn btn-primario">Registrar libro</button>
+          <button type="reset" class="btn btn-secundario">Limpiar formulario de libro</button>
+        </div>
+      </form>
+
+      <h3>Libros registrados</h3>
+      <p id="libros-mensaje-vacio" class="mensaje mensaje-info" role="status" hidden>Todavía no hay libros registrados.</p>
+      <div class="tabla-responsive">
+        <table>
+          <caption>Listado de libros registrados</caption>
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">ISBN</th>
+              <th scope="col">Editorial</th>
+              <th scope="col">Género</th>
+              <th scope="col">Autores</th>
+              <th scope="col">Precio</th>
+            </tr>
+          </thead>
+          <tbody id="libros-tabla-cuerpo">
+            <tr>
+              <td>Rayuela</td>
+              <td>978-950-039-123-4</td>
+              <td>Sudamericana</td>
+              <td>Novela</td>
+              <td>Julio Cortázar</td>
+              <td>$1500.00</td>
+            </tr>
+            <tr>
+              <td>Manual de librería</td>
+              <td>978-950-000-001-2</td>
+              <td>Eudeba</td>
+              <td>Sin clasificar</td>
+              <td>Ana Pérez, Luis Gómez</td>
+              <td>$2000.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ CLIENTES ============ -->
+    <section id="clientes" aria-labelledby="titulo-clientes">
+      <h2 id="titulo-clientes">Clientes</h2>
+      <p>Alta de clientes y listado de clientes registrados.</p>
+
+      <h3>Registrar un cliente</h3>
+      <form id="form-cliente" class="formulario" action="#" method="post" novalidate>
+        <div class="form-grid">
+          <div class="campo">
+            <label for="cliente-nombre">Nombre completo *</label>
+            <input type="text" id="cliente-nombre" name="nombre" required maxlength="80" placeholder="Ej.: María Fernández">
+          </div>
+          <div class="campo">
+            <label for="cliente-email">Email *</label>
+            <input type="email" id="cliente-email" name="email" required placeholder="Ej.: maria@correo.com">
+          </div>
+        </div>
+        <div id="form-cliente-errores" class="mensaje mensaje-error" role="alert" hidden></div>
+        <p id="form-cliente-exito" class="mensaje mensaje-exito" role="status" hidden>Cliente registrado correctamente.</p>
+        <div class="acciones">
+          <button type="submit" class="btn btn-primario">Registrar cliente</button>
+          <button type="reset" class="btn btn-secundario">Limpiar formulario de cliente</button>
+        </div>
+      </form>
+
+      <h3>Clientes registrados</h3>
+      <p id="clientes-mensaje-vacio" class="mensaje mensaje-info" role="status" hidden>Todavía no hay clientes registrados.</p>
+      <div class="tabla-responsive">
+        <table>
+          <caption>Listado de clientes registrados</caption>
+          <thead>
+            <tr>
+              <th scope="col">Nombre completo</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody id="clientes-tabla-cuerpo">
+            <tr>
+              <td>María Fernández</td>
+              <td>maria@correo.com</td>
+            </tr>
+            <tr>
+              <td>Juan Pérez</td>
+              <td>juan@correo.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ VENTAS ============ -->
+    <section id="ventas" aria-labelledby="titulo-ventas">
+      <h2 id="titulo-ventas">Ventas</h2>
+      <p>Seleccioná un cliente, agregá renglones y confirmá la venta.</p>
+
+      <h3>Componer venta</h3>
+      <div class="form-grid">
+        <div class="campo">
+          <label for="venta-cliente">Cliente *</label>
+          <select id="venta-cliente" name="cliente" required>
+            <option value="">Seleccioná un cliente…</option>
+            <option value="cl1">María Fernández</option>
+            <option value="cl2">Juan Pérez</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset class="renglon-fieldset">
+        <legend>Agregar renglón</legend>
+        <div class="form-grid">
+          <div class="campo">
+            <label for="venta-libro">Libro *</label>
+            <select id="venta-libro" name="libro">
+              <option value="">Seleccioná un libro…</option>
+              <option value="lib1">Rayuela — $1500.00</option>
+              <option value="lib2">Manual de librería — $2000.00</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="venta-cantidad">Cantidad *</label>
+            <input type="number" id="venta-cantidad" name="cantidad" min="1" step="1" value="1">
+          </div>
+        </div>
+        <div class="acciones">
+          <button type="button" id="btn-agregar-renglon" class="btn btn-secundario">Agregar renglón a la venta</button>
+        </div>
+      </fieldset>
+
+      <div id="venta-mensaje" class="mensaje mensaje-info" role="status">Agregá al menos un renglón con un libro y una cantidad entera mayor que cero.</div>
+
+      <h3>Renglones de la venta actual</h3>
+      <p id="venta-renglones-vacio" class="mensaje mensaje-info" role="status" hidden>La venta todavía no tiene renglones.</p>
+      <div class="tabla-responsive">
+        <table>
+          <caption>Renglones de la venta en curso</caption>
+          <thead>
+            <tr>
+              <th scope="col">Libro</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio unitario</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="venta-renglones-cuerpo">
+            <tr>
+              <td>Rayuela</td>
+              <td>2</td>
+              <td>$1500.00</td>
+              <td>$3000.00</td>
+              <td>
+                <button type="button" class="btn btn-secundario btn-chico">Quitar renglón</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="total-venta">Total de la venta: <strong id="venta-total">$3000.00</strong></p>
+      <div class="acciones">
+        <button type="button" id="btn-confirmar-venta" class="btn btn-primario">Confirmar venta</button>
+        <button type="button" id="btn-limpiar-venta" class="btn btn-secundario">Limpiar venta actual</button>
+      </div>
+    </section>
+
+    <!-- ============ HISTORIAL ============ -->
+    <section id="historial" aria-labelledby="titulo-historial">
+      <h2 id="titulo-historial">Historial</h2>
+      <p>Listado de ventas confirmadas y acceso a sus detalles. Las ventas confirmadas no se editan ni eliminan.</p>
+
+      <p id="historial-mensaje-vacio" class="mensaje mensaje-info" role="status" hidden>Todavía no hay ventas registradas.</p>
+      <div class="tabla-responsive">
+        <table>
+          <caption>Historial de ventas</caption>
+          <thead>
+            <tr>
+              <th scope="col">Identificador</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Total</th>
+              <th scope="col">Detalle</th>
+            </tr>
+          </thead>
+          <tbody id="historial-tabla-cuerpo">
+            <tr>
+              <td>1</td>
+              <td>2026-10-01</td>
+              <td>María Fernández</td>
+              <td>$5000.00</td>
+              <td><button type="button" class="btn btn-secundario btn-chico">Ver detalle de venta 1</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article id="historial-detalle" aria-labelledby="titulo-detalle" hidden>
+        <h3 id="titulo-detalle">Detalle de la venta</h3>
+        <div id="historial-detalle-contenido">
+          <dl class="datos-venta">
+            <div><dt>Identificador:</dt><dd>1</dd></div>
+            <div><dt>Fecha:</dt><dd>2026-10-01</dd></div>
+            <div><dt>Cliente:</dt><dd>María Fernández</dd></div>
+            <div><dt>Total:</dt><dd>$5000.00</dd></div>
+          </dl>
+          <div class="tabla-responsive">
+            <table>
+              <caption>Renglones de la venta seleccionada</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Libro</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio unitario</th>
+                  <th scope="col">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rayuela</td>
+                  <td>2</td>
+                  <td>$1500.00</td>
+                  <td>$3000.00</td>
+                </tr>
+                <tr>
+                  <td>Manual de librería</td>
+                  <td>1</td>
+                  <td>$2000.00</td>
+                  <td>$2000.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Librería Página Abierta - Bologne Sur Mer 770</p>
+  </footer>
+</body>
+</html>

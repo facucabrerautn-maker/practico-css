@@ -1,0 +1,390 @@
+/* Librería Página Abierta · Parcial 1
+   Identidad propia: tinta azul + papel cálido + acento terracota.
+   Mobile-first. Sin librerías ni CDNs. */
+
+:root {
+  --papel: #faf6ef;
+  --fondo-seccion: #ffffff;
+  --tinta: #1f3a25;
+  --tinta-suave: #4a6e5a;
+  --primario: #1d572b;
+  --primario-oscuro: #154014;
+  --acento: #b5541e;
+  --borde: #ddd3c2;
+  --exito-fondo: #e9f5ec;
+  --exito-borde: #7d4c2e;
+  --exito-texto: #4d1b1b;
+  --error-fondo: #fdecea;
+  --error-borde: #1e6eb3;
+  --error-texto: #144f7a;
+  --aviso-fondo: #fff7e0;
+  --aviso-borde: #8a6d00;
+  --aviso-texto: #5c4a00;
+  --info-fondo: #e9eef6;
+  --info-borde: #1d3557;
+  --radio: 10px;
+  --espacio: 1rem;
+  --max-ancho: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body, input, select, button, table {
+  font-size: 1rem;
+}
+
+/* Enlace de salto para teclado */
+.salto-contenido {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  background: var(--primario);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 100;
+}
+
+.salto-contenido:focus {
+  top: 0;
+  color: #fff;
+}
+
+/* Encabezado y navegación */
+.encabezado {
+  background: var(--primario);
+  color: #fff;
+}
+
+.encabezado-inner {
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+  padding: 1.25rem 1rem 0.25rem;
+}
+
+.marca {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+.marca span { color: #f4d35e; }
+
+.subtitulo {
+  margin: 0.1rem 0 0.75rem;
+  color: #d9e2ef;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.9rem;
+}
+
+nav { border-top: 1px solid rgba(255,255,255,0.25); }
+
+.navegacion {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  max-width: var(--max-ancho);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.navegacion a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.95rem;
+}
+
+.navegacion a:hover {
+  border-color: #f4d35e;
+}
+
+.navegacion a:focus-visible {
+  outline: 3px solid #f4d35e;
+  outline-offset: 2px;
+}
+
+/* Contenido */
+main {
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+section {
+  background: var(--fondo-seccion);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1rem;
+  min-width: 0;
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--primario);
+  border-bottom: 3px solid var(--acento);
+  padding-bottom: 0.3rem;
+}
+
+h3 { color: var(--primario-oscuro); }
+
+/* Buscador y formularios con Flex/Grid */
+.buscador, .formulario {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+label {
+  font-weight: bold;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.92rem;
+}
+
+input, select {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 2px solid var(--tinta-suave);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tinta);
+}
+
+select[multiple] { min-height: 7.5rem; }
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Botones reutilizables */
+.btn {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.95rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--primario);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primario {
+  background: var(--primario);
+  color: #fff;
+}
+
+.btn-primario:hover { background: var(--primario-oscuro); }
+
+.btn-secundario {
+  background: #fff;
+  color: var(--primario);
+}
+
+.btn-secundario:hover { background: #eef2f7; }
+
+.btn-chico {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.renglon-fieldset {
+  border: 2px dashed var(--borde);
+  border-radius: var(--radio);
+  padding: 0.9rem;
+  margin: 1rem 0 0;
+  min-width: 0;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 0.4rem;
+  color: var(--primario);
+}
+
+/* Tarjetas de catálogo con Grid */
+.tarjetas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tarjeta {
+  border: 1px solid var(--borde);
+  border-left: 6px solid var(--acento);
+  border-radius: var(--radio);
+  padding: 1rem;
+  background: #fffdf8;
+  min-width: 0;
+}
+
+.tarjeta h3 { margin: 0 0 0.5rem; }
+
+.datos-libro, .datos-venta {
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.datos-libro div, .datos-venta div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.datos-libro dt, .datos-venta dt {
+  font-weight: bold;
+  color: var(--tinta-suave);
+}
+
+.datos-libro dd, .datos-venta dd { margin: 0; }
+
+/* Tablas: scroll dentro de su contenedor */
+.tabla-responsive {
+  overflow-x: auto;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 640px;
+  background: #fff;
+}
+
+caption {
+  text-align: left;
+  padding: 0.6rem;
+  font-weight: bold;
+  color: var(--tinta-suave);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.9rem;
+}
+
+th, td {
+  border-top: 1px solid var(--borde);
+  padding: 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background: var(--primario);
+  color: #fff;
+  border-top: none;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) { background: #f7f2e7; }
+
+/* Mensajes con texto, no solo color */
+.mensaje {
+  border: 2px solid;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  margin: 0.9rem 0;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.93rem;
+}
+
+.mensaje-info {
+  background: var(--info-fondo);
+  border-color: var(--info-borde);
+  color: var(--tinta);
+}
+
+.mensaje-exito {
+  background: var(--exito-fondo);
+  border-color: var(--exito-borde);
+  color: var(--exito-texto);
+  font-weight: bold;
+}
+
+.mensaje-error {
+  background: var(--error-fondo);
+  border-color: var(--error-borde);
+  color: var(--error-texto);
+  font-weight: bold;
+}
+
+.mensaje-aviso {
+  background: var(--aviso-fondo);
+  border-color: var(--aviso-borde);
+  color: var(--aviso-texto);
+  font-weight: bold;
+}
+
+.total-venta {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+/* Detalle historial */
+#historial-detalle {
+  border-top: 2px solid var(--borde);
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
+
+.pie {
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+
+/* Foco visible para mouse y teclado */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* Vista amplia 1280px: dos columnas en formularios y más tarjetas */
+@media (min-width: 768px) {
+  main { padding: 1.5rem; }
+
+  .form-grid { grid-template-columns: 1fr 1fr; }
+
+  .tarjetas { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+  section { padding: 1.5rem; }
+
+  .marca { font-size: 1.8rem; }
+}
